@@ -1,23 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { getCategories } from '../../services/productService';
 
 const FilterSidebar = ({ onFilterChange }) => {
+  const [categories, setCategories] = useState([]);
   const [category, setCategory] = useState('');
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(10000);
 
+  // ═══════════════════════════════════════════════
+  // FETCH CATEGORIES FROM BACKEND
+  // ═══════════════════════════════════════════════
+  useEffect(() => {
+    const fetchCats = async () => {
+      try {
+        const cats = await getCategories();
+        setCategories(cats);
+      } catch (error) {
+        console.error('❌ Error fetching categories:', error);
+      }
+    };
+    fetchCats();
+  }, []);
+
   const handleCategoryChange = (e) => {
     const newCategory = e.target.value;
     setCategory(newCategory);
+    console.log('🔍 Filter by category ID:', newCategory);
     onFilterChange({ category: newCategory });
   };
 
   const handlePriceChange = () => {
+    console.log('🔍 Filter by price:', minPrice, '-', maxPrice);
     onFilterChange({ minPrice, maxPrice });
   };
 
   return (
-    <div className="w-64 card h-fit">
-      <h3 className="text-xl font-bold mb-4">Filters</h3>
+    <div className="w-64 card h-fit sticky top-20">
+      <h3 className="text-xl font-bold mb-4">🔍 Filters</h3>
 
       {/* Category Filter */}
       <div className="mb-6">
@@ -28,10 +47,11 @@ const FilterSidebar = ({ onFilterChange }) => {
           className="w-full px-3 py-2 border rounded"
         >
           <option value="">All Categories</option>
-          <option value="Men">Men</option>
-          <option value="Women">Women</option>
-          <option value="Kids">Kids</option>
-          <option value="Accessories">Accessories</option>
+          {categories.map(cat => (
+            <option key={cat._id} value={cat._id}>
+              {cat.name}
+            </option>
+          ))}
         </select>
       </div>
 
@@ -43,14 +63,14 @@ const FilterSidebar = ({ onFilterChange }) => {
             type="number"
             placeholder="Min"
             value={minPrice}
-            onChange={(e) => setMinPrice(e.target.value)}
+            onChange={(e) => setMinPrice(parseInt(e.target.value) || 0)}
             className="w-full px-3 py-2 border rounded"
           />
           <input
             type="number"
             placeholder="Max"
             value={maxPrice}
-            onChange={(e) => setMaxPrice(e.target.value)}
+            onChange={(e) => setMaxPrice(parseInt(e.target.value) || 10000)}
             className="w-full px-3 py-2 border rounded"
           />
           <button 

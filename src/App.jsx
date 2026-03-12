@@ -6,9 +6,9 @@ import Navbar from './components/common/Navbar';
 import ProtectedRoute from './components/common/ProtectedRoute';
 import Login from './components/auth/Login';
 import Signup from './components/auth/Signup';
-import BrandDashboard from './components/brand/BrandDashboard';
-import ProductForm from './components/brand/ProductForm';
-import Marketplace from './components/customer/Marketplace';
+import BrandPage from './pages/BrandPage';
+import CustomerPage from './pages/CustomerPage';
+import ProductFormSimple from './components/brand/ProductFormSimple';
 import ProductDetails from './components/customer/ProductDetails';
 import Home from './pages/Home';
 
@@ -26,7 +26,7 @@ function App() {
             path="/brand/dashboard" 
             element={
               <ProtectedRoute requiredRole="Brand">
-                <BrandDashboard />
+                <BrandPage />
               </ProtectedRoute>
             } 
           />
@@ -35,7 +35,7 @@ function App() {
             path="/brand/create-product" 
             element={
               <ProtectedRoute requiredRole="Brand">
-                <ProductForm mode="create" />
+                <ProductFormSimple />
               </ProtectedRoute>
             } 
           />
@@ -44,7 +44,7 @@ function App() {
             path="/brand/edit/:id" 
             element={
               <ProtectedRoute requiredRole="Brand">
-                <ProductForm mode="edit" />
+                <ProductFormSimple />
               </ProtectedRoute>
             } 
           />
@@ -54,7 +54,7 @@ function App() {
             path="/marketplace" 
             element={
               <ProtectedRoute requiredRole="Customer">
-                <Marketplace />
+                <CustomerPage />
               </ProtectedRoute>
             } 
           />

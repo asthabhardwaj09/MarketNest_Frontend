@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createProduct, updateProduct } from '../../services/productService';
 import { AuthContext } from '../../context/AuthContext';
@@ -10,6 +10,15 @@ const ProductForm = ({ productData = null, mode = 'create' }) => {
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [images, setImages] = useState(productData?.images || []);
+  const [imageMode, setImageMode] = useState('upload'); // 'upload' or 'url'
+  const [urlInput, setUrlInput] = useState('');
+
+  // Redirect if not a Brand user
+  useEffect(() => {
+    if (user && user.role !== 'Brand') {
+      navigate('/');
+    }
+  }, [user, navigate]);
   
   const [formData, setFormData] = useState({
     name: productData?.name || '',
@@ -55,6 +64,23 @@ const ProductForm = ({ productData = null, mode = 'create' }) => {
     toast.success('Image removed');
   };
 
+  const addImageFromUrl = () => {
+    if (!urlInput.trim()) {
+      return toast.error('Please enter an image URL');
+    }
+
+    // Basic URL validation
+    try {
+      new URL(urlInput);
+    } catch {
+      return toast.error('Invalid URL format');
+    }
+
+    setImages([...images, urlInput.trim()]);
+    setUrlInput('');
+    toast.success('Image URL added successfully');
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -88,36 +114,45 @@ const ProductForm = ({ productData = null, mode = 'create' }) => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-4xl font-bold mb-8">
-        {mode === 'create' ? '➕ Create New Product' : '✏️ Edit Product'}
-      </h1>
+    <div className="min-h-screen bg-neutral-50" style={{ paddingTop: '100px', paddingBottom: '2rem', position: 'relative', zIndex: 1 }}>
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="mb-8">
+          <h1 className="text-4xl font-bold text-neutral-900 mb-2">
+            {mode === 'create' ? '➕ Create New Product' : '✏️ Edit Product'}
+          </h1>
+          <p className="text-neutral-600 text-lg">
+            {mode === 'create' 
+              ? 'Add a new product to your store' 
+              : 'Update your product details'}
+          </p>
+        </div>
 
-      <form onSubmit={handleSubmit} className="card space-y-6">
+        <div className="bg-white rounded-xl shadow-lg p-8 border border-neutral-200">
+          <form onSubmit={handleSubmit} className="space-y-6">
         {/* Product Name */}
         <div>
-          <label className="block font-semibold mb-2">Product Name *</label>
+          <label className="block font-semibold text-neutral-900 mb-2">Product Name *</label>
           <input
             type="text"
             name="name"
             value={formData.name}
             onChange={handleInputChange}
             placeholder="e.g., Summer Cotton T-Shirt"
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-600"
+            className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:outline-none focus:border-primary-600 focus:ring-2 focus:ring-primary-100"
             required
           />
         </div>
 
         {/* Description */}
         <div>
-          <label className="block font-semibold mb-2">Description *</label>
+          <label className="block font-semibold text-neutral-900 mb-2">Description *</label>
           <textarea
             name="description"
             value={formData.description}
             onChange={handleInputChange}
             placeholder="Describe your product in detail..."
             rows="5"
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-600"
+            className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:outline-none focus:border-primary-600 focus:ring-2 focus:ring-primary-100"
             required
           ></textarea>
         </div>
@@ -125,7 +160,7 @@ const ProductForm = ({ productData = null, mode = 'create' }) => {
         {/* Price & Stock */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block font-semibold mb-2">Price ($) *</label>
+            <label className="block font-semibold text-neutral-900 mb-2">Price ($) *</label>
             <input
               type="number"
               name="price"
@@ -133,20 +168,20 @@ const ProductForm = ({ productData = null, mode = 'create' }) => {
               onChange={handleInputChange}
               placeholder="0.00"
               step="0.01"
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-600"
+              className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:outline-none focus:border-primary-600 focus:ring-2 focus:ring-primary-100"
               required
             />
           </div>
 
           <div>
-            <label className="block font-semibold mb-2">Stock Quantity *</label>
+            <label className="block font-semibold text-neutral-900 mb-2">Stock Quantity *</label>
             <input
               type="number"
               name="stock"
               value={formData.stock}
               onChange={handleInputChange}
               placeholder="0"
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-600"
+              className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:outline-none focus:border-primary-600 focus:ring-2 focus:ring-primary-100"
               required
             />
           </div>
@@ -155,12 +190,12 @@ const ProductForm = ({ productData = null, mode = 'create' }) => {
         {/* Category & Status */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block font-semibold mb-2">Category *</label>
+            <label className="block font-semibold text-neutral-900 mb-2">Category *</label>
             <select
               name="category"
               value={formData.category}
               onChange={handleInputChange}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-600"
+              className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:outline-none focus:border-primary-600 focus:ring-2 focus:ring-primary-100"
             >
               <option value="Men">Men</option>
               <option value="Women">Women</option>
@@ -170,12 +205,12 @@ const ProductForm = ({ productData = null, mode = 'create' }) => {
           </div>
 
           <div>
-            <label className="block font-semibold mb-2">Status *</label>
+            <label className="block font-semibold text-neutral-900 mb-2">Status *</label>
             <select
               name="status"
               value={formData.status}
               onChange={handleInputChange}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-600"
+              className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:outline-none focus:border-primary-600 focus:ring-2 focus:ring-primary-100"
             >
               <option value="draft">Draft</option>
               <option value="published">Published</option>
@@ -185,29 +220,85 @@ const ProductForm = ({ productData = null, mode = 'create' }) => {
 
         {/* Image Upload */}
         <div>
-          <label className="block font-semibold mb-2">Product Images (Upload Multiple) *</label>
-          <div className="border-2 border-dashed border-blue-300 rounded-lg p-6 text-center">
-            <input
-              type="file"
-              id="imageInput"
-              multiple
-              accept="image/*"
-              onChange={handleImageUpload}
-              disabled={uploading}
-              className="hidden"
-            />
-            <label htmlFor="imageInput" className="cursor-pointer">
-              <p className="text-blue-600 font-semibold">
-                {uploading ? '⏳ Uploading...' : '📸 Click to upload images'}
-              </p>
-              <p className="text-gray-500 text-sm">or drag and drop</p>
-            </label>
+          <label className="block font-semibold mb-3">Product Images *</label>
+          
+          {/* Mode Toggle */}
+          <div className="flex gap-2 mb-4 border rounded-lg p-1 bg-neutral-50">
+            <button
+              type="button"
+              onClick={() => setImageMode('upload')}
+              className={`flex-1 py-2 px-4 rounded-md font-medium transition ${
+                imageMode === 'upload'
+                  ? 'bg-blue-600 text-white'
+                  : 'text-neutral-700 hover:bg-neutral-100'
+              }`}
+            >
+              📸 Upload Files
+            </button>
+            <button
+              type="button"
+              onClick={() => setImageMode('url')}
+              className={`flex-1 py-2 px-4 rounded-md font-medium transition ${
+                imageMode === 'url'
+                  ? 'bg-blue-600 text-white'
+                  : 'text-neutral-700 hover:bg-neutral-100'
+              }`}
+            >
+              🔗 Add URL
+            </button>
           </div>
+
+          {/* File Upload Mode */}
+          {imageMode === 'upload' && (
+            <div className="border-2 border-dashed border-blue-300 rounded-lg p-6 text-center">
+              <input
+                type="file"
+                id="imageInput"
+                multiple
+                accept="image/*"
+                onChange={handleImageUpload}
+                disabled={uploading}
+                className="hidden"
+              />
+              <label htmlFor="imageInput" className="cursor-pointer">
+                <p className="text-blue-600 font-semibold">
+                  {uploading ? '⏳ Uploading to Cloudinary...' : '📸 Click to upload images'}
+                </p>
+                <p className="text-gray-500 text-sm">or drag and drop (uploads to Cloudinary)</p>
+              </label>
+            </div>
+          )}
+
+          {/* URL Input Mode */}
+          {imageMode === 'url' && (
+            <div className="space-y-3">
+              <div className="flex gap-2">
+                <input
+                  type="url"
+                  value={urlInput}
+                  onChange={(e) => setUrlInput(e.target.value)}
+                  placeholder="e.g., https://images.unsplash.com/photo-..."
+                  onKeyPress={(e) => e.key === 'Enter' && addImageFromUrl()}
+                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-600"
+                />
+                <button
+                  type="button"
+                  onClick={addImageFromUrl}
+                  className="btn-primary px-6"
+                >
+                  ➕ Add
+                </button>
+              </div>
+              <p className="text-sm text-neutral-600">
+                💡 Tip: Copy image URL from Unsplash, Pinterest, or any image hosting service and paste here
+              </p>
+            </div>
+          )}
 
           {/* Uploaded Images Preview */}
           {images.length > 0 && (
             <div className="mt-4">
-              <p className="font-semibold mb-3">Uploaded Images ({images.length})</p>
+              <p className="font-semibold mb-3">Added Images ({images.length})</p>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {images.map((image, index) => (
                   <div key={index} className="relative group">
@@ -215,6 +306,7 @@ const ProductForm = ({ productData = null, mode = 'create' }) => {
                       src={image}
                       alt={`Product ${index + 1}`}
                       className="w-full h-32 object-cover rounded-lg"
+                      onError={(e) => (e.target.src = 'https://via.placeholder.com/128')}
                     />
                     <button
                       type="button"
@@ -231,23 +323,25 @@ const ProductForm = ({ productData = null, mode = 'create' }) => {
         </div>
 
         {/* Submit Buttons */}
-        <div className="flex gap-4 pt-4">
+        <div className="flex gap-4 pt-6 border-t border-neutral-200">
           <button
             type="submit"
             disabled={loading}
-            className="btn-primary flex-1"
+            className="btn btn-primary flex-1"
           >
             {loading ? '⏳ Saving...' : mode === 'create' ? '➕ Create Product' : '✏️ Update Product'}
           </button>
           <button
             type="button"
             onClick={() => navigate('/brand/dashboard')}
-            className="btn-secondary flex-1"
+            className="btn btn-secondary flex-1"
           >
             Cancel
           </button>
         </div>
-      </form>
+          </form>
+        </div>
+      </div>
     </div>
   );
 };
