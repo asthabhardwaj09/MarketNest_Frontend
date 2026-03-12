@@ -1,0 +1,567 @@
+@import "tailwindcss";
+
+@theme {
+  /* Primary (Blue) */
+  --color-primary-50: #eff6ff;
+  --color-primary-100: #dbeafe;
+  --color-primary-200: #bfdbfe;
+  --color-primary-300: #93c5fd;
+  --color-primary-400: #60a5fa;
+  --color-primary-500: #3b82f6;
+  --color-primary-600: #2563eb;
+  --color-primary-700: #1d4ed8;
+  --color-primary-800: #1e40af;
+  --color-primary-900: #1e3a8a;
+
+  /* Secondary (Orange) */
+  --color-secondary-50: #fff7ed;
+  --color-secondary-100: #ffedd5;
+  --color-secondary-300: #fdba74;
+  --color-secondary-500: #f97316;
+  --color-secondary-600: #ea580c;
+  --color-secondary-700: #c2410c;
+
+  /* Neutral */
+  --color-neutral-50: #f9fafb;
+  --color-neutral-100: #f3f4f6;
+  --color-neutral-200: #e5e7eb;
+  --color-neutral-300: #d1d5db;
+  --color-neutral-400: #9ca3af;
+  --color-neutral-500: #6b7280;
+  --color-neutral-600: #4b5563;
+  --color-neutral-700: #374151;
+  --color-neutral-800: #1f2937;
+  --color-neutral-900: #111827;
+
+  /* Status Colors */
+  --color-success: #10b981;
+  --color-error: #ef4444;
+  --color-warning: #f59e0b;
+
+  /* Gradients */
+  --color-gradient-primary-subtle: #eff6ff;
+
+  /* Shadows */
+  --shadow-base: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Custom background utility */
+.bg-gradient-primary-subtle {
+  background-color: #eff6ff;
+}
+
+/* ═══════════════════════════════════════════════════════════════ */
+/* GLOBAL STYLES */
+/* ═══════════════════════════════════════════════════════════════ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fafafa;
+  color: #222;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ═══════════════════════════════════════════════════════════════ */
+/* TYPOGRAPHY */
+/* ═══════════════════════════════════════════════════════════════ */
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  color: #1f2937;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: 2.25rem;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 1.875rem;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+h4 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+p {
+  line-height: 1.6;
+  color: #4b5563;
+}
+
+a {
+  color: #3b82f6;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+a:hover {
+  color: #2563eb;
+  text-decoration: underline;
+}
+
+/* ═══════════════════════════════════════════════════════════════ */
+/* BUTTONS */
+/* ═══════════════════════════════════════════════════════════════ */
+
+.btn {
+  @apply px-6 py-2.5 rounded-lg font-medium transition-all duration-200 ease-in-out cursor-pointer;
+  border: none;
+  outline: none;
+  display: inline-block;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Primary Button */
+.btn-primary {
+  @apply bg-primary-500 text-white hover:bg-primary-600 active:bg-primary-700;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+
+.btn-primary:hover:not(:disabled) {
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+  transform: translateY(-1px);
+}
+
+/* Secondary Button */
+.btn-secondary {
+  @apply bg-neutral-100 text-neutral-900 hover:bg-neutral-200 active:bg-neutral-300;
+  border: 1px solid #d1d5db;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  @apply bg-neutral-200;
+}
+
+/* Danger Button */
+.btn-danger {
+  @apply bg-error text-white hover:bg-red-600 active:bg-red-700;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+}
+
+/* Success Button */
+.btn-success {
+  @apply bg-success text-white hover:bg-emerald-600 active:bg-emerald-700;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+/* Ghost Button */
+.btn-ghost {
+  @apply bg-transparent text-primary-500 hover:bg-primary-50 active:bg-primary-100;
+  border: 1px solid #3b82f6;
+}
+
+/* ═══════════════════════════════════════════════════════════════ */
+/* CARDS & CONTAINERS */
+/* ═══════════════════════════════════════════════════════════════ */
+
+.card {
+  @apply bg-white rounded-xl p-6 shadow-base;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  @apply shadow-md;
+  transform: translateY(-2px);
+}
+
+.card-elevated {
+  @apply bg-white rounded-xl p-6 shadow-lg;
+}
+
+.card-flat {
+  @apply bg-white rounded-lg p-4 border border-neutral-200;
+}
+
+/* ═══════════════════════════════════════════════════════════════ */
+/* FORMS & INPUTS */
+/* ═══════════════════════════════════════════════════════════════ */
+
+input,
+textarea,
+select {
+  @apply w-full px-4 py-2.5 border border-neutral-300 rounded-lg;
+  @apply focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-200;
+  @apply transition-all duration-200;
+  font-size: 1rem;
+  background-color: #ffffff;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #9ca3af;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+input:disabled,
+textarea:disabled,
+select:disabled {
+  background-color: #f3f4f6;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* Form Group */
+.form-group {
+  @apply mb-5;
+}
+
+.form-group label {
+  @apply block font-medium text-neutral-700 mb-2 text-sm;
+}
+
+.form-group .form-error {
+  @apply text-error text-xs mt-1;
+}
+
+.form-group input.error,
+.form-group textarea.error,
+.form-group select.error {
+  @apply border-error focus:ring-error focus:border-error;
+}
+
+/* ═══════════════════════════════════════════════════════════════ */
+/* NAVBAR */
+/* ═══════════════════════════════════════════════════════════════ */
+
+.navbar {
+  @apply sticky top-0 z-50 bg-white border-b border-neutral-200 shadow-sm;
+}
+
+.navbar-content {
+  @apply max-w-7xl mx-auto px-4 py-4 flex justify-between items-center;
+}
+
+.navbar-brand {
+  @apply font-bold text-2xl text-primary-600 cursor-pointer hover:text-primary-700 transition-colors;
+  text-decoration: none;
+}
+
+.navbar-nav {
+  @apply flex gap-4 items-center;
+}
+
+.navbar-link {
+  @apply text-neutral-600 font-medium hover:text-primary-600 transition-colors;
+  cursor: pointer;
+}
+
+.navbar-link.active {
+  @apply text-primary-600 border-b-2 border-primary-600 pb-4;
+}
+
+/* ═══════════════════════════════════════════════════════════════ */
+/* BADGES & TAGS */
+/* ═══════════════════════════════════════════════════════════════ */
+
+.badge {
+  @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium;
+}
+
+.badge-primary {
+  @apply bg-primary-100 text-primary-800;
+}
+
+.badge-success {
+  @apply bg-emerald-100 text-emerald-800;
+}
+
+.badge-warning {
+  @apply bg-amber-100 text-amber-800;
+}
+
+.badge-error {
+  @apply bg-red-100 text-red-800;
+}
+
+.badge-neutral {
+  @apply bg-neutral-100 text-neutral-800;
+}
+
+/* ═══════════════════════════════════════════════════════════════ */
+/* GRID & LAYOUT */
+/* ═══════════════════════════════════════════════════════════════ */
+
+.container {
+  @apply max-w-7xl mx-auto px-4 md:px-6 lg:px-8;
+}
+
+.grid-auto {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6;
+}
+
+.grid-3 {
+  @apply grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6;
+}
+
+.grid-2 {
+  @apply grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6;
+}
+
+/* ═══════════════════════════════════════════════════════════════ */
+/* PRODUCT CARD */
+/* ═══════════════════════════════════════════════════════════════ */
+
+.product-card {
+  @apply bg-white rounded-xl overflow-hidden border border-neutral-200;
+  transition: all 0.3s ease;
+}
+
+.product-card:hover {
+  @apply shadow-lg border-primary-300;
+  transform: translateY(-4px);
+}
+
+.product-card-image {
+  @apply w-full h-48 object-cover bg-neutral-100 relative overflow-hidden;
+}
+
+.product-card-image img {
+  @apply w-full h-full object-cover;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-card-image img {
+  transform: scale(1.05);
+}
+
+.product-card-badge {
+  @apply absolute top-3 right-3 bg-secondary-500 text-white px-3 py-1 rounded-full text-sm font-medium;
+}
+
+.product-card-content {
+  @apply p-4;
+}
+
+.product-card-brand {
+  @apply text-xs text-neutral-500 font-semibold uppercase tracking-wide mb-1;
+}
+
+.product-card-name {
+  @apply text-sm md:text-base font-semibold text-neutral-900 mb-2 line-clamp-2;
+}
+
+.product-card-price {
+  @apply flex items-center gap-2 mb-3;
+}
+
+.product-card-price-current {
+  @apply text-xl font-bold text-neutral-900;
+}
+
+.product-card-price-original {
+  @apply text-sm text-neutral-500 line-through;
+}
+
+.product-card-discount {
+  @apply text-xs font-bold text-secondary-500;
+}
+
+.product-card-rating {
+  @apply flex items-center gap-1 text-sm mb-3;
+}
+
+.product-card-rating-star {
+  @apply text-amber-400;
+}
+
+/* ═══════════════════════════════════════════════════════════════ */
+/* FILTER SIDEBAR */
+/* ═══════════════════════════════════════════════════════════════ */
+
+.filter-sidebar {
+  @apply bg-white rounded-xl p-6 shadow-base h-fit sticky top-24;
+}
+
+.filter-section {
+  @apply mb-6 pb-6 border-b border-neutral-200;
+}
+
+.filter-section:last-child {
+  @apply border-0;
+}
+
+.filter-title {
+  @apply font-semibold text-neutral-900 mb-4 text-sm uppercase tracking-wider;
+}
+
+.filter-option {
+  @apply flex items-center mb-3 cursor-pointer;
+}
+
+.filter-option input {
+  @apply w-4 h-4 accent-primary-500 cursor-pointer mr-3;
+}
+
+.filter-option label {
+  @apply cursor-pointer font-medium text-neutral-700 text-sm;
+}
+
+.filter-option:hover label {
+  @apply text-primary-600;
+}
+
+/* ═══════════════════════════════════════════════════════════════ */
+/* ALERTS & NOTIFICATIONS */
+/* ═══════════════════════════════════════════════════════════════ */
+
+.alert {
+  @apply px-4 py-4 rounded-lg border mb-4;
+}
+
+.alert-primary {
+  @apply bg-primary-50 border-primary-300 text-primary-800;
+}
+
+.alert-success {
+  @apply bg-emerald-50 border-emerald-300 text-emerald-800;
+}
+
+.alert-warning {
+  @apply bg-amber-50 border-amber-300 text-amber-800;
+}
+
+.alert-error {
+  @apply bg-red-50 border-red-300 text-red-800;
+}
+
+/* ═══════════════════════════════════════════════════════════════ */
+/* TABLES */
+/* ═══════════════════════════════════════════════════════════════ */
+
+table {
+  @apply w-full border-collapse;
+}
+
+th {
+  @apply bg-neutral-50 border-b-2 border-neutral-200 px-4 py-3 text-left font-semibold text-neutral-700;
+}
+
+td {
+  @apply border-b border-neutral-200 px-4 py-3;
+}
+
+tr:hover {
+  @apply bg-neutral-50;
+}
+
+/* ═══════════════════════════════════════════════════════════════ */
+/* PAGINATION */
+/* ═══════════════════════════════════════════════════════════════ */
+
+.pagination {
+  @apply flex justify-center items-center gap-2 my-8;
+}
+
+.pagination-btn {
+  @apply px-4 py-2 rounded-lg border border-neutral-300 text-neutral-700 hover:bg-primary-50 hover:border-primary-300 hover:text-primary-600 transition-all;
+  cursor: pointer;
+}
+
+.pagination-btn.active {
+  @apply bg-primary-500 text-white border-primary-500;
+}
+
+.pagination-btn:disabled {
+  @apply opacity-50 cursor-not-allowed;
+}
+
+/* ═══════════════════════════════════════════════════════════════ */
+/* MODAL & OVERLAY */
+/* ═══════════════════════════════════════════════════════════════ */
+
+.modal-overlay {
+  @apply fixed inset-0 flex items-center justify-center z-50;
+  background-color: rgba(0, 0, 0, 0.5);
+  animation: fadeIn 0.3s ease;
+}
+
+.modal {
+  @apply bg-white rounded-2xl shadow-xl max-w-md w-full mx-4 p-6;
+  animation: slideIn 0.3s ease;
+}
+
+/* ═══════════════════════════════════════════════════════════════ */
+/* UTILITIES */
+/* ═══════════════════════════════════════════════════════════════ */
+
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;           /* ✅ add this */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;           /* ✅ add this */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;           /* ✅ add this */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.blur-bg {
+  @apply backdrop-blur-md;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.gradient-primary {
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+}
+
+.gradient-secondary {
+  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+}
+
+/* ═══════════════════════════════════════════════════════════════ */
+/* RESPONSIVE UTILITIES */
+/* ═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  .hide-mobile {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .show-mobile {
+    display: none;
+  }
+}
