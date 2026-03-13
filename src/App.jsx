@@ -21,7 +21,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
 
-          {/* Brand Routes */}
+    
           <Route 
             path="/brand/dashboard" 
             element={
@@ -49,7 +49,7 @@ function App() {
             } 
           />
 
-          {/* Customer Routes */}
+   
           <Route 
             path="/marketplace" 
             element={

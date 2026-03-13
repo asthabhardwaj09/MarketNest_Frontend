@@ -7,16 +7,13 @@ const FilterSidebar = ({ onFilterChange }) => {
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(10000);
 
-  // ═══════════════════════════════════════════════
-  // FETCH CATEGORIES FROM BACKEND
-  // ═══════════════════════════════════════════════
   useEffect(() => {
     const fetchCats = async () => {
       try {
         const cats = await getCategories();
         setCategories(cats);
       } catch (error) {
-        console.error('❌ Error fetching categories:', error);
+        console.error('Error fetching categories:', error);
       }
     };
     fetchCats();
@@ -25,20 +22,18 @@ const FilterSidebar = ({ onFilterChange }) => {
   const handleCategoryChange = (e) => {
     const newCategory = e.target.value;
     setCategory(newCategory);
-    console.log('🔍 Filter by category ID:', newCategory);
+    console.log('Filter by category ID:', newCategory);
     onFilterChange({ category: newCategory });
   };
 
   const handlePriceChange = () => {
-    console.log('🔍 Filter by price:', minPrice, '-', maxPrice);
+    console.log('Filter by price:', minPrice, '-', maxPrice);
     onFilterChange({ minPrice, maxPrice });
   };
 
   return (
     <div className="w-64 card h-fit sticky top-20">
-      <h3 className="text-xl font-bold mb-4">🔍 Filters</h3>
-
-      {/* Category Filter */}
+      <h3 className="text-xl font-bold mb-4">Filters</h3>
       <div className="mb-6">
         <label className="block font-semibold mb-2">Category</label>
         <select 
@@ -54,8 +49,6 @@ const FilterSidebar = ({ onFilterChange }) => {
           ))}
         </select>
       </div>
-
-      {/* Price Filter */}
       <div className="mb-6">
         <label className="block font-semibold mb-2">Price Range</label>
         <div className="space-y-2">

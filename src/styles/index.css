@@ -1,12 +1,9 @@
 @import "tailwindcss";
 
-/* ═════════════════════════════════════════════════════════════════════════════ */
-/* MARKETNEST — CLEAN MINIMAL FASHION MARKETPLACE */
-/* Inspired by Myntra · Tailwind v4 Compatible */
-/* ═════════════════════════════════════════════════════════════════════════════ */
+
 
 @theme {
-  /* Primary — Indigo (elevated from plain blue) */
+
   --color-primary-50:  #eef2ff;
   --color-primary-100: #e0e7ff;
   --color-primary-200: #c7d2fe;
@@ -18,7 +15,7 @@
   --color-primary-800: #3730a3;
   --color-primary-900: #312e81;
 
-  /* Secondary — Warm Rose (fashion-forward accent) */
+
   --color-secondary-50:  #fff1f2;
   --color-secondary-100: #ffe4e6;
   --color-secondary-200: #fecdd3;
@@ -30,7 +27,7 @@
   --color-secondary-800: #9f1239;
   --color-secondary-900: #881337;
 
-  /* Neutral */
+ 
   --color-neutral-50:  #fafafa;
   --color-neutral-100: #f4f4f5;
   --color-neutral-200: #e4e4e7;
@@ -42,7 +39,7 @@
   --color-neutral-800: #27272a;
   --color-neutral-900: #18181b;
 
-  /* Semantic */
+ 
   --color-success: #10b981;
   --color-success-light: #d1fae5;
   --color-warning: #f59e0b;
@@ -50,7 +47,7 @@
   --color-error: #ef4444;
   --color-error-light: #fee2e2;
 
-  /* Shadows */
+
   --shadow-xs:   0 1px 2px rgba(0,0,0,0.04);
   --shadow-sm:   0 1px 4px rgba(0,0,0,0.07);
   --shadow-md:   0 4px 12px rgba(0,0,0,0.09);
@@ -59,9 +56,7 @@
   --shadow-card: 0 2px 8px rgba(99,102,241,0.08);
 }
 
-/* ═════════════════════════════════════════════════════════════════════════════ */
-/* CSS VARIABLES (non-theme) */
-/* ═════════════════════════════════════════════════════════════════════════════ */
+
 
 :root {
   --font-sans: 'DM Sans', 'Segoe UI', system-ui, sans-serif;
@@ -80,9 +75,7 @@
   --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ═════════════════════════════════════════════════════════════════════════════ */
-/* GLOBAL RESET */
-/* ═════════════════════════════════════════════════════════════════════════════ */
+
 
 *, *::before, *::after {
   box-sizing: border-box;
@@ -104,9 +97,7 @@ body {
   line-height: 1.6;
 }
 
-/* ═════════════════════════════════════════════════════════════════════════════ */
-/* TYPOGRAPHY */
-/* ═════════════════════════════════════════════════════════════════════════════ */
+
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-sans);
@@ -137,9 +128,7 @@ a {
 
 a:hover { color: #4338ca; }
 
-/* ═════════════════════════════════════════════════════════════════════════════ */
-/* BUTTONS */
-/* ═════════════════════════════════════════════════════════════════════════════ */
+
 
 .btn {
   display: inline-flex;
@@ -166,7 +155,7 @@ a:hover { color: #4338ca; }
   transform: none !important;
 }
 
-/* Primary */
+
 .btn-primary {
   background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
   color: white;
@@ -183,7 +172,7 @@ a:hover { color: #4338ca; }
   transform: translateY(0);
 }
 
-/* Secondary */
+
 .btn-secondary {
   background-color: white;
   color: #3f3f46;
@@ -197,7 +186,7 @@ a:hover { color: #4338ca; }
   transform: translateY(-1px);
 }
 
-/* Danger */
+
 .btn-danger {
   background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
   color: white;
@@ -209,7 +198,7 @@ a:hover { color: #4338ca; }
   box-shadow: 0 6px 20px rgba(244, 63, 94, 0.4);
 }
 
-/* Success */
+
 .btn-success {
   background: linear-gradient(135deg, #10b981 0%, #059669 100%);
   color: white;
@@ -221,7 +210,7 @@ a:hover { color: #4338ca; }
   box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
 }
 
-/* Ghost */
+
 .btn-ghost {
   background: transparent;
   color: #4f46e5;
@@ -233,9 +222,7 @@ a:hover { color: #4338ca; }
   border-color: #4f46e5;
 }
 
-/* ═════════════════════════════════════════════════════════════════════════════ */
-/* CARDS */
-/* ═════════════════════════════════════════════════════════════════════════════ */
+
 
 .card {
   background: white;
@@ -252,7 +239,7 @@ a:hover { color: #4338ca; }
   transform: translateY(-3px);
 }
 
-/* Elevated card — used for login/signup */
+
 .card-elevated {
   background: white;
   border-radius: var(--radius-2xl);
@@ -263,7 +250,6 @@ a:hover { color: #4338ca; }
   overflow: hidden;
 }
 
-/* Subtle top accent line on elevated cards */
 .card-elevated::before {
   content: '';
   position: absolute;
@@ -282,9 +268,7 @@ a:hover { color: #4338ca; }
   border: 1px solid #e4e4e7;
 }
 
-/* ═════════════════════════════════════════════════════════════════════════════ */
-/* CONTAINER & LAYOUT */
-/* ═════════════════════════════════════════════════════════════════════════════ */
+
 
 .container {
   max-width: 1400px;
@@ -316,9 +300,7 @@ a:hover { color: #4338ca; }
   gap: 1.5rem;
 }
 
-/* ═════════════════════════════════════════════════════════════════════════════ */
-/* FORMS & INPUTS */
-/* ═════════════════════════════════════════════════════════════════════════════ */
+
 
 input,
 textarea,
@@ -404,9 +386,6 @@ textarea.error {
   box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important;
 }
 
-/* ═════════════════════════════════════════════════════════════════════════════ */
-/* NAVBAR */
-/* ═════════════════════════════════════════════════════════════════════════════ */
 
 .navbar {
   position: sticky;
@@ -493,9 +472,7 @@ textarea.error {
   background-color: #d4d4d8;
 }
 
-/* ═════════════════════════════════════════════════════════════════════════════ */
-/* BADGES */
-/* ═════════════════════════════════════════════════════════════════════════════ */
+
 
 .badge {
   display: inline-flex;
@@ -515,9 +492,6 @@ textarea.error {
 .badge-error     { background: #fee2e2; color: #991b1b; }
 .badge-neutral   { background: #f4f4f5; color: #27272a; }
 
-/* ═════════════════════════════════════════════════════════════════════════════ */
-/* ALERTS */
-/* ═════════════════════════════════════════════════════════════════════════════ */
 
 .alert {
   padding: 1rem 1.25rem;
@@ -535,9 +509,6 @@ textarea.error {
 .alert-warning  { background: #fef3c7; border-color: #f59e0b; color: #92400e; }
 .alert-error    { background: #fee2e2; border-color: #ef4444; color: #991b1b; }
 
-/* ═════════════════════════════════════════════════════════════════════════════ */
-/* PRODUCT CARDS */
-/* ═════════════════════════════════════════════════════════════════════════════ */
 
 .product-card {
   background: white;
@@ -575,7 +546,7 @@ textarea.error {
   transform: scale(1.08);
 }
 
-/* Wishlist button on hover */
+
 .product-card .product-wishlist {
   position: absolute;
   top: 0.75rem;
@@ -680,9 +651,6 @@ textarea.error {
 
 .product-rating-star { color: #fbbf24; }
 
-/* ═════════════════════════════════════════════════════════════════════════════ */
-/* LOGIN / SIGNUP PAGE */
-/* ═════════════════════════════════════════════════════════════════════════════ */
 
 .auth-page {
   min-height: 100vh;
@@ -694,7 +662,7 @@ textarea.error {
   overflow: hidden;
 }
 
-/* Decorative background for auth pages */
+
 .auth-page::before {
   content: '';
   position: fixed;
@@ -719,9 +687,7 @@ textarea.error {
   pointer-events: none;
 }
 
-/* ═════════════════════════════════════════════════════════════════════════════ */
-/* FILTER SIDEBAR */
-/* ═════════════════════════════════════════════════════════════════════════════ */
+
 
 .filter-sidebar {
   background: white;
@@ -780,9 +746,7 @@ textarea.error {
 
 .filter-option:hover label { color: #4f46e5; }
 
-/* ═════════════════════════════════════════════════════════════════════════════ */
-/* TABLES */
-/* ═════════════════════════════════════════════════════════════════════════════ */
+
 
 table {
   width: 100%;
@@ -814,9 +778,6 @@ tbody tr {
 
 tbody tr:hover { background: #fafafa; }
 
-/* ═════════════════════════════════════════════════════════════════════════════ */
-/* PAGINATION */
-/* ═════════════════════════════════════════════════════════════════════════════ */
 
 .pagination {
   display: flex;
@@ -859,9 +820,7 @@ tbody tr:hover { background: #fafafa; }
   cursor: not-allowed;
 }
 
-/* ═════════════════════════════════════════════════════════════════════════════ */
-/* MODAL */
-/* ═════════════════════════════════════════════════════════════════════════════ */
+
 
 .modal-overlay {
   position: fixed;
@@ -897,9 +856,6 @@ tbody tr:hover { background: #fafafa; }
   background: linear-gradient(90deg, #6366f1, #f43f5e);
 }
 
-/* ═════════════════════════════════════════════════════════════════════════════ */
-/* FOOTER */
-/* ═════════════════════════════════════════════════════════════════════════════ */
 
 .footer {
   background: #18181b;
@@ -1017,9 +973,7 @@ tbody tr:hover { background: #fafafa; }
 
 .footer-bottom-links a:hover { color: #a5b4fc; }
 
-/* ═════════════════════════════════════════════════════════════════════════════ */
-/* UTILITY CLASSES */
-/* ═════════════════════════════════════════════════════════════════════════════ */
+
 
 .line-clamp-1 {
   display: -webkit-box;
@@ -1067,9 +1021,7 @@ tbody tr:hover { background: #fafafa; }
   background-color: rgba(255, 255, 255, 0.9);
 }
 
-/* ═════════════════════════════════════════════════════════════════════════════ */
-/* ANIMATIONS */
-/* ═════════════════════════════════════════════════════════════════════════════ */
+
 
 @keyframes fadeIn {
   from { opacity: 0; }
@@ -1089,9 +1041,6 @@ tbody tr:hover { background: #fafafa; }
 .animate-slide-up { animation: slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
 .animate-spin { animation: spin 1s linear infinite; }
 
-/* ═════════════════════════════════════════════════════════════════════════════ */
-/* RESPONSIVE */
-/* ═════════════════════════════════════════════════════════════════════════════ */
 
 @media (max-width: 1024px) {
   .footer-grid {

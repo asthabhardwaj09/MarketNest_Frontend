@@ -18,7 +18,7 @@ const Login = () => {
     try {
       const data = await login(email, password);
       setUser(data.user);
-      toast.success('Login successful! 🎉');
+      toast.success('Login successful!');
       navigate(data.user.role === 'Brand' ? '/brand/dashboard' : '/marketplace');
     } catch (error) {
       toast.error(error.response?.data?.message || 'Login failed');
@@ -30,18 +30,15 @@ const Login = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-primary-subtle py-12 px-4">
       <div className="w-full max-w-md">
-        {/* Card */}
         <div className="card-elevated">
-          {/* Header */}
           <div className="text-center mb-8">
-            <div className="text-4xl mb-3">🛍️</div>
+            <div className="text-4xl mb-3"></div>
             <h1 className="text-3xl font-bold text-neutral-900">Welcome Back</h1>
             <p className="text-neutral-600 mt-2">Sign in to your MarketNest account</p>
           </div>
 
-          {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-5">
-            {/* Email Field */}
+
             <div className="form-group">
               <label htmlFor="email">Email Address</label>
               <input
@@ -54,7 +51,6 @@ const Login = () => {
               />
             </div>
 
-            {/* Password Field */}
             <div className="form-group">
               <label htmlFor="password">Password</label>
               <input
@@ -67,7 +63,6 @@ const Login = () => {
               />
             </div>
 
-            {/* Remember Me & Forgot Password */}
             <div className="flex items-center justify-between text-sm">
               <label className="flex items-center gap-2 cursor-pointer">
                 <input type="checkbox" className="w-4 h-4 accent-primary-500" />
@@ -78,7 +73,7 @@ const Login = () => {
               </a>
             </div>
 
-            {/* Submit Button */}
+
             <button
               type="submit"
               disabled={loading}
@@ -86,7 +81,7 @@ const Login = () => {
             >
               {loading ? (
                 <>
-                  <span>⏳ Signing in...</span>
+                  <span>Signing in...</span>
                 </>
               ) : (
                 'Sign In'
@@ -94,7 +89,7 @@ const Login = () => {
             </button>
           </form>
 
-          {/* Divider */}
+          
           <div className="mt-6 mb-6 relative">
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-neutral-300"></div>
@@ -104,7 +99,6 @@ const Login = () => {
             </div>
           </div>
 
-          {/* Sign Up Link */}
           <p className="text-center text-neutral-700">
             Don't have an account?{' '}
             <button
@@ -116,9 +110,8 @@ const Login = () => {
           </p>
         </div>
 
-        {/* Footer Info */}
         <div className="mt-8 text-center text-neutral-600 text-sm">
-          <p>🔒 Your data is secure and encrypted</p>
+          <p>Your data is secure and encrypted</p>
         </div>
       </div>
     </div>

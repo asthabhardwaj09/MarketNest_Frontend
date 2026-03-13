@@ -36,15 +36,11 @@ const Navbar = () => {
       borderBottom: '1px solid #e4e4e7',
       boxShadow: '0 1px 6px rgba(0,0,0,0.05)',
     }}>
-
-      {/* ── TOP ROW ── */}
       <div style={{
         maxWidth: '1400px', margin: '0 auto',
         padding: '0.75rem 1.25rem',
         display: 'flex', alignItems: 'center', gap: '1.5rem',
       }}>
-
-        {/* Logo */}
         <div
           onClick={() => navigate('/')}
           style={{
@@ -58,10 +54,8 @@ const Navbar = () => {
             letterSpacing: '-0.5px', userSelect: 'none',
           }}
         >
-          🛍️ MarketNest
+          MarketNest
         </div>
-
-        {/* Search Bar — customers & guests only */}
         {(!user || user.role === 'Customer') && (
           <form
             onSubmit={handleSearch}
@@ -97,20 +91,14 @@ const Navbar = () => {
           </form>
         )}
 
-        {/* Spacer for brand users */}
         {user?.role === 'Brand' && <div style={{ flex: 1 }} />}
 
-        {/* ── RIGHT SIDE ── */}
+
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', whiteSpace: 'nowrap' }}>
 
           {user ? (
             user.role === 'Brand' ? (
-
-              /* ══════════════════════════════
-                 SELLER NAV — Clean pill style
-              ══════════════════════════════ */
               <>
-                {/* Seller identity pill */}
                 <div style={{
                   display: 'flex', alignItems: 'center', gap: '0.55rem',
                   background: '#eef2ff',
@@ -118,7 +106,6 @@ const Navbar = () => {
                   borderRadius: '9999px',
                   padding: '0.35rem 0.85rem 0.35rem 0.45rem',
                 }}>
-                  {/* Avatar */}
                   <div style={{
                     width: '28px', height: '28px', borderRadius: '50%',
                     background: 'linear-gradient(135deg, #6366f1, #4338ca)',
@@ -127,21 +114,16 @@ const Navbar = () => {
                   }}>
                     {user.name?.charAt(0).toUpperCase()}
                   </div>
-                  {/* Name + role */}
                   <div style={{ lineHeight: 1.25 }}>
                     <div style={{ fontSize: '0.82rem', fontWeight: 700, color: '#3730a3' }}>
                       {user.name?.split(' ')[0]}
                     </div>
                     <div style={{ fontSize: '0.66rem', fontWeight: 600, color: '#6366f1', letterSpacing: '0.2px' }}>
-                      🏪 Seller
+                      Seller
                     </div>
                   </div>
                 </div>
-
-                {/* Divider */}
                 <div style={{ width: '1px', height: '22px', background: '#e4e4e7', flexShrink: 0 }} />
-
-                {/* Dashboard button */}
                 <button
                   onClick={() => navigate('/brand/dashboard')}
                   style={{
@@ -155,11 +137,9 @@ const Navbar = () => {
                   onMouseOver={e => { e.currentTarget.style.background = '#eef2ff'; e.currentTarget.style.color = '#4f46e5'; }}
                   onMouseOut={e => { e.currentTarget.style.background = 'none'; e.currentTarget.style.color = '#52525b'; }}
                 >
-                  <span style={{ fontSize: '0.95rem' }}>📊</span>
+                  <span style={{ fontSize: '0.95rem' }}></span>
                   Dashboard
                 </button>
-
-                {/* + New Product */}
                 <button
                   onClick={() => navigate('/brand/create-product')}
                   style={{
@@ -177,8 +157,6 @@ const Navbar = () => {
                 >
                   ＋ New Product
                 </button>
-
-                {/* Logout */}
                 <button
                   onClick={handleLogout}
                   style={{
@@ -196,10 +174,6 @@ const Navbar = () => {
               </>
 
             ) : (
-
-              /* ══════════════════════════════
-                 CUSTOMER NAV
-              ══════════════════════════════ */
               <>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                   <div style={{
@@ -215,7 +189,7 @@ const Navbar = () => {
                       {user.name?.split(' ')[0]}
                     </div>
                     <div style={{ fontSize: '0.7rem', fontWeight: 600, color: '#10b981' }}>
-                      🛒 Buyer
+                      Buyer
                     </div>
                   </div>
                 </div>
@@ -235,7 +209,7 @@ const Navbar = () => {
                   onMouseOver={e => { e.currentTarget.style.background = '#f0fdf4'; e.currentTarget.style.color = '#10b981'; }}
                   onMouseOut={e => { e.currentTarget.style.background = 'none'; e.currentTarget.style.color = '#52525b'; }}
                 >
-                  <span>🏬</span> Marketplace
+                  <span></span> Marketplace
                 </button>
 
                 <button
@@ -250,7 +224,7 @@ const Navbar = () => {
                   onMouseOver={e => { e.currentTarget.style.background = '#fff1f2'; e.currentTarget.style.color = '#f43f5e'; }}
                   onMouseOut={e => { e.currentTarget.style.background = 'none'; e.currentTarget.style.color = '#52525b'; }}
                 >
-                  <span>🤍</span> Wishlist
+                  <span></span> Wishlist
                 </button>
 
                 <button
@@ -269,10 +243,6 @@ const Navbar = () => {
               </>
             )
           ) : (
-
-            /* ══════════════════════════════
-               GUEST NAV
-            ══════════════════════════════ */
             <>
               <button
                 onClick={() => navigate('/login')}
@@ -300,7 +270,7 @@ const Navbar = () => {
                 onMouseOver={e => e.currentTarget.style.color = '#f43f5e'}
                 onMouseOut={e => e.currentTarget.style.color = '#52525b'}
               >
-                <span style={{ fontSize: '1.2rem' }}>🤍</span>
+                <span style={{ fontSize: '1.2rem' }}></span>
                 Wishlist
               </button>
 
@@ -339,7 +309,6 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* ── CATEGORY BAR — guests & customers only ── */}
       {(!user || user.role === 'Customer') && (
         <div style={{ borderTop: '1px solid #f4f4f5', background: 'white' }}>
           <div style={{
@@ -382,7 +351,6 @@ const Navbar = () => {
         </div>
       )}
 
-      {/* ── SELLER BREADCRUMB BAR ── */}
       {user?.role === 'Brand' && (
         <div style={{ borderTop: '1px solid #f4f4f5', background: '#fafafa' }}>
           <div style={{
@@ -390,7 +358,7 @@ const Navbar = () => {
             padding: '0.45rem 1.5rem',
             display: 'flex', alignItems: 'center', gap: '0.5rem',
           }}>
-            <span style={{ fontSize: '0.75rem', color: '#a1a1aa' }}>🏪 Seller Portal</span>
+            <span style={{ fontSize: '0.75rem', color: '#a1a1aa' }}>Seller Portal</span>
             <span style={{ color: '#d4d4d8', fontSize: '0.75rem' }}>›</span>
             <span style={{ fontSize: '0.75rem', color: '#6366f1', fontWeight: 600 }}>Dashboard</span>
           </div>

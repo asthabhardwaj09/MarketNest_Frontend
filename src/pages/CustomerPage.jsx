@@ -7,7 +7,7 @@ import toast from 'react-hot-toast';
 const CustomerPage = () => {
   const { user, loading: authLoading } = useContext(AuthContext);
   const navigate = useNavigate();
-  
+
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
@@ -16,7 +16,6 @@ const CustomerPage = () => {
   const [cart, setCart] = useState([]);
   const [wishlist, setWishlist] = useState([]);
 
-  // Filters
   const [filters, setFilters] = useState({
     search: '',
     category: '',
@@ -26,9 +25,7 @@ const CustomerPage = () => {
 
   const [showMobileFilter, setShowMobileFilter] = useState(false);
 
-  // ═══════════════════════════════════════════════
-  // CHECK AUTHORIZATION
-  // ═══════════════════════════════════════════════
+
 
   useEffect(() => {
     if (!authLoading && user?.role !== 'Customer') {
@@ -36,28 +33,23 @@ const CustomerPage = () => {
     }
   }, [authLoading, user, navigate]);
 
-  // ═══════════════════════════════════════════════
-  // FETCH CATEGORIES ON MOUNT
-  // ═══════════════════════════════════════════════
+
 
   useEffect(() => {
     const fetchCats = async () => {
       try {
-        console.log('🔄 Fetching categories...');
+        console.log('Fetching categories...');
         const cats = await getCategories();
-        console.log('✅ Categories fetched:', cats);
+        console.log('Categories fetched:', cats);
         setCategories(cats || []);
       } catch (error) {
-        console.error('❌ Error fetching categories:', error);
+        console.error('Error fetching categories:', error);
         toast.error('Failed to load categories');
       }
     };
     fetchCats();
   }, []);
 
-  // ═══════════════════════════════════════════════
-  // FETCH PRODUCTS
-  // ═══════════════════════════════════════════════
 
   useEffect(() => {
     if (user?.role === 'Customer') {
@@ -68,9 +60,9 @@ const CustomerPage = () => {
   const fetchProducts = async () => {
     try {
       setLoading(true);
-      console.log('🔄 Fetching products with filters:', filters);
+      console.log('Fetching products with filters:', filters);
       const data = await getProducts(page, 12, filters);
-      console.log('✅ Products response:', {
+      console.log('Products response:', {
         productsCount: data.products?.length || 0,
         total: data.pagination?.total || 0,
         filters
@@ -78,7 +70,7 @@ const CustomerPage = () => {
       setProducts(data.products || []);
       setTotalProducts(data.pagination?.total || 0);
     } catch (error) {
-      console.error('❌ Error fetching products:', {
+      console.error('Error fetching products:', {
         status: error.response?.status,
         message: error.response?.data?.message || error.message,
         filters
@@ -90,9 +82,6 @@ const CustomerPage = () => {
     }
   };
 
-  // ═══════════════════════════════════════════════
-  // FILTER HANDLERS
-  // ═══════════════════════════════════════════════
 
   const handleSearchChange = (e) => {
     const searchTerm = e.target.value;
@@ -112,9 +101,7 @@ const CustomerPage = () => {
     setPage(1);
   };
 
-  // ═══════════════════════════════════════════════
-  // CART & WISHLIST HANDLERS
-  // ═══════════════════════════════════════════════
+
 
   const addToCart = (product) => {
     const existingItem = cart.find((item) => item._id === product._id);
@@ -127,7 +114,7 @@ const CustomerPage = () => {
     } else {
       setCart([...cart, { ...product, quantity: 1 }]);
     }
-    toast.success('✅ Added to cart!');
+    toast.success(' Added to cart!');
   };
 
   const toggleWishlist = (product) => {
@@ -137,7 +124,7 @@ const CustomerPage = () => {
       toast.success('Removed from wishlist');
     } else {
       setWishlist([...wishlist, product]);
-      toast.success('❤️ Added to wishlist!');
+      toast.success('Added to wishlist!');
     }
   };
 
@@ -158,12 +145,12 @@ const CustomerPage = () => {
 
   return (
     <div className="min-h-screen bg-neutral-50">
-      {/* Header */}
+
       <div className="bg-white border-b border-neutral-200 py-6 sticky top-16 z-40">
         <div className="container max-w-7xl mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div>
-              <h1 className="text-3xl font-bold text-neutral-900">🛒 Marketplace</h1>
+              <h1 className="text-3xl font-bold text-neutral-900">Marketplace</h1>
               <p className="text-neutral-600">Browse latest fashion collections</p>
             </div>
             <div className="flex gap-3">
@@ -171,32 +158,28 @@ const CustomerPage = () => {
                 onClick={() => setShowMobileFilter(!showMobileFilter)}
                 className="md:hidden btn btn-secondary"
               >
-                🔍 Filters
+                Filters
               </button>
               <button className="btn btn-primary relative">
-                🛒 Cart ({cart.length})
+                Cart ({cart.length})
               </button>
               <button className="btn btn-secondary relative">
-                ❤️ Wishlist ({wishlist.length})
+                Wishlist ({wishlist.length})
               </button>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Main Content */}
       <div className="container max-w-7xl mx-auto px-4 py-8">
         <div className="flex gap-6">
-          {/* Filters Sidebar */}
+
           <div
-            className={`w-64 ${
-              showMobileFilter ? 'block' : 'hidden'
-            } md:block`}
+            className={`w-64 ${showMobileFilter ? 'block' : 'hidden'
+              } md:block`}
           >
             <div className="card-elevated sticky top-32 space-y-6">
-              <h3 className="text-lg font-bold text-neutral-900">🔍 Filters</h3>
-
-              {/* Search */}
+              <h3 className="text-lg font-bold text-neutral-900">Filters</h3>
               <div>
                 <label className="block font-medium text-neutral-800 mb-2">Search Products</label>
                 <input
@@ -208,37 +191,33 @@ const CustomerPage = () => {
                 />
               </div>
 
-              {/* Category */}
               <div>
                 <label className="block font-medium text-neutral-800 mb-3">Category</label>
                 <div className="space-y-2">
                   <button
                     onClick={() => handleCategoryChange('')}
-                    className={`w-full text-left px-3 py-2 rounded-lg transition-all ${
-                      filters.category === ''
+                    className={`w-full text-left px-3 py-2 rounded-lg transition-all ${filters.category === ''
                         ? 'bg-primary-100 text-primary-700 font-medium'
                         : 'hover:bg-neutral-100'
-                    }`}
+                      }`}
                   >
-                    ✅ All Categories
+                    All Categories
                   </button>
                   {categories.map((cat) => (
                     <button
                       key={cat._id}
                       onClick={() => handleCategoryChange(cat._id)}
-                      className={`w-full text-left px-3 py-2 rounded-lg transition-all ${
-                        filters.category === cat._id
+                      className={`w-full text-left px-3 py-2 rounded-lg transition-all ${filters.category === cat._id
                           ? 'bg-primary-100 text-primary-700 font-medium'
                           : 'hover:bg-neutral-100'
-                      }`}
+                        }`}
                     >
-                      📂 {cat.name}
+                      {cat.name}
                     </button>
                   ))}
                 </div>
               </div>
 
-              {/* Price Range */}
               <div>
                 <label className="block font-medium text-neutral-800 mb-3">Price Range</label>
                 <div className="space-y-2">
@@ -271,7 +250,6 @@ const CustomerPage = () => {
                 </div>
               </div>
 
-              {/* Clear Filters */}
               <button
                 onClick={() => {
                   setFilters({
@@ -284,12 +262,11 @@ const CustomerPage = () => {
                 }}
                 className="btn btn-secondary w-full"
               >
-                ↺ Clear Filters
+                Clear Filters
               </button>
             </div>
           </div>
 
-          {/* Products Grid */}
           <div className="flex-1">
             {products.length === 0 ? (
               <div className="card-elevated text-center py-12">
@@ -299,13 +276,11 @@ const CustomerPage = () => {
               </div>
             ) : (
               <>
-                {/* Products Count */}
                 <p className="text-neutral-600 mb-6">
                   Showing {(page - 1) * 12 + 1}-{Math.min(page * 12, totalProducts)} of{' '}
                   {totalProducts} products
                 </p>
 
-                {/* Product Grid */}
                 <div className="grid-auto mb-8">
                   {products.map((product) => (
                     <div key={product._id} className="product-card">
@@ -339,17 +314,16 @@ const CustomerPage = () => {
                             onClick={() => addToCart(product)}
                             className="btn btn-primary flex-1"
                           >
-                            🛒 Add to Cart
+                            Add to Cart
                           </button>
                           <button
                             onClick={() => toggleWishlist(product)}
-                            className={`btn ${
-                              wishlist.find((item) => item._id === product._id)
+                            className={`btn ${wishlist.find((item) => item._id === product._id)
                                 ? 'btn-primary'
                                 : 'btn-secondary'
-                            }`}
+                              }`}
                           >
-                            ❤️
+
                           </button>
                         </div>
                       </div>
@@ -357,7 +331,7 @@ const CustomerPage = () => {
                   ))}
                 </div>
 
-                {/* Pagination */}
+
                 <div className="pagination">
                   <button
                     onClick={() => setPage(Math.max(1, page - 1))}

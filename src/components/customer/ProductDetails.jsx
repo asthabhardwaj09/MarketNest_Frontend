@@ -28,7 +28,7 @@ const ProductDetails = () => {
     }
   };
 
-  if (loading) return <div className="flex justify-center items-center h-screen">⏳ Loading...</div>;
+  if (loading) return <div className="flex justify-center items-center h-screen"> Loading...</div>;
   if (!product) return <div className="text-center py-12">Product not found</div>;
 
   return (
@@ -41,7 +41,6 @@ const ProductDetails = () => {
       </button>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {/* Images Section */}
         <div>
           <div className="card mb-4">
             <img
@@ -65,15 +64,12 @@ const ProductDetails = () => {
             </div>
           )}
         </div>
-
-        {/* Details Section */}
         <div>
           <h1 className="text-4xl font-bold mb-2">{product.name}</h1>
-          
+
           <div className="flex items-center gap-4 mb-4">
-            <span className={`px-4 py-1 rounded-full font-semibold ${
-              product.status === 'published' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
-            }`}>
+            <span className={`px-4 py-1 rounded-full font-semibold ${product.status === 'published' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
+              }`}>
               {product.status === 'published' ? '✓ In Stock' : 'Out of Stock'}
             </span>
             <span className="text-gray-600">Category: {product.category}</span>
@@ -81,14 +77,13 @@ const ProductDetails = () => {
 
           <p className="text-gray-600 mb-4">{product.description}</p>
 
-          {/* Price & Stock */}
+
           <div className="card mb-6 bg-blue-50">
             <p className="text-gray-600">Price</p>
             <p className="text-4xl font-bold text-blue-600 mb-3">${product.price}</p>
             <p className="text-gray-600">Available Stock: <span className="font-bold">{product.stock}</span></p>
           </div>
 
-          {/* Quantity & Add to Cart */}
           <div className="mb-6">
             <label className="block font-semibold mb-2">Quantity:</label>
             <div className="flex items-center gap-4">
@@ -114,23 +109,21 @@ const ProductDetails = () => {
               </button>
             </div>
           </div>
-
-          {/* Action Buttons */}
           <div className="flex gap-4">
             <button
               disabled={product.stock === 0}
               className="btn-primary flex-1 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              🛒 Add to Cart ({quantity})
+              Add to Cart ({quantity})
             </button>
             <button className="btn-secondary flex-1">
-              ❤️ Save for Later
+              Save for Later
             </button>
           </div>
 
-          {/* Additional Info */}
+
           <div className="card mt-8">
-            <h3 className="font-bold text-lg mb-3">📋 Product Information</h3>
+            <h3 className="font-bold text-lg mb-3">Product Information</h3>
             <ul className="space-y-2 text-gray-600">
               <li><strong>Category:</strong> {product.category}</li>
               <li><strong>Stock:</strong> {product.stock} units available</li>

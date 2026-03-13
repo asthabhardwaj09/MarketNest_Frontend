@@ -7,33 +7,33 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Primary Colors (Professional Blue)
+
         primary: {
           50: '#f0f7ff',
           100: '#e0effe',
           200: '#c7e0fe',
           300: '#a4c7fd',
           400: '#76a5fa',
-          500: '#3b82f6',  // Main Blue
+          500: '#3b82f6', 
           600: '#2563eb',
           700: '#1d4ed8',
           800: '#1e40af',
           900: '#1e3a8a',
         },
-        // Secondary Colors (Orange - for CTAs)
+
         secondary: {
           50: '#fff7ed',
           100: '#ffedd5',
           200: '#fed7aa',
           300: '#fdba74',
           400: '#fb923c',
-          500: '#f97316',  // Main Orange
+          500: '#f97316', 
           600: '#ea580c',
           700: '#c2410c',
           800: '#9a3412',
           900: '#7c2d12',
         },
-        // Neutral Colors
+
         neutral: {
           50: '#f9fafb',
           100: '#f3f4f6',
@@ -46,7 +46,7 @@ export default {
           800: '#1f2937',
           900: '#111827',
         },
-        // Status Colors
+
         success: '#10b981',
         warning: '#f59e0b',
         error: '#ef4444',

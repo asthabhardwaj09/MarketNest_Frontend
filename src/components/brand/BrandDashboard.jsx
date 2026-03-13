@@ -46,16 +46,15 @@ const BrandDashboard = () => {
   );
 
   const statCards = [
-    { label: 'Total Products', value: stats.total, icon: '📦', color: '#6366f1', bg: '#eef2ff', border: '#c7d2fe' },
-    { label: 'Published', value: stats.published, icon: '✅', color: '#10b981', bg: '#f0fdf4', border: '#a7f3d0' },
-    { label: 'Drafts', value: stats.draft, icon: '📝', color: '#f59e0b', bg: '#fffbeb', border: '#fde68a' },
-    { label: 'Archived', value: stats.archived, icon: '🗃️', color: '#f43f5e', bg: '#fff1f2', border: '#fecdd3' },
+    { label: 'Total Products', value: stats.total, icon: '', color: '#6366f1', bg: '#eef2ff', border: '#c7d2fe' },
+    { label: 'Published', value: stats.published, icon: '', color: '#10b981', bg: '#f0fdf4', border: '#a7f3d0' },
+    { label: 'Drafts', value: stats.draft, icon: '', color: '#f59e0b', bg: '#fffbeb', border: '#fde68a' },
+    { label: 'Archived', value: stats.archived, icon: '', color: '#f43f5e', bg: '#fff1f2', border: '#fecdd3' },
   ];
 
   return (
     <div style={{ minHeight: '100vh', background: '#fafafa', fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif' }}>
 
-      {/* ── HEADER BANNER ── */}
       <div style={{
         background: 'linear-gradient(135deg, #4338ca 0%, #6366f1 60%, #ec4899 100%)',
         padding: '2.5rem 2rem',
@@ -66,13 +65,13 @@ const BrandDashboard = () => {
         <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', position: 'relative', zIndex: 1 }}>
           <div>
             <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.85rem', fontWeight: 500, marginBottom: '0.3rem' }}>
-              👋 Welcome back,
+              Welcome back,
             </p>
             <h1 style={{ color: 'white', fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: 800, letterSpacing: '-0.5px', margin: 0 }}>
               {user?.name}
             </h1>
             <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '0.85rem', marginTop: '0.3rem' }}>
-              🏪 Seller Dashboard · Manage your products
+              Seller Dashboard · Manage your products
             </p>
           </div>
 
@@ -94,8 +93,6 @@ const BrandDashboard = () => {
       </div>
 
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '2rem' }}>
-
-        {/* ── STAT CARDS ── */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.25rem', marginBottom: '2rem' }}>
           {statCards.map(({ label, value, icon, color, bg, border }) => (
             <div key={label} style={{
@@ -122,8 +119,6 @@ const BrandDashboard = () => {
             </div>
           ))}
         </div>
-
-        {/* ── QUICK ACTIONS ── */}
         <div style={{ display: 'flex', gap: '0.75rem', marginBottom: '2rem', flexWrap: 'wrap' }}>
           <button
             onClick={() => navigate('/brand/create-product')}
@@ -150,18 +145,16 @@ const BrandDashboard = () => {
             onMouseOver={e => { e.currentTarget.style.borderColor = '#6366f1'; e.currentTarget.style.color = '#4f46e5'; }}
             onMouseOut={e => { e.currentTarget.style.borderColor = '#e4e4e7'; e.currentTarget.style.color = '#52525b'; }}
           >
-            🏬 View Marketplace
+            View Marketplace
           </button>
         </div>
 
-        {/* ── PRODUCTS TABLE ── */}
         <div style={{
           background: 'white', borderRadius: '20px',
           border: '1.5px solid #e4e4e7',
           boxShadow: '0 4px 16px rgba(0,0,0,0.05)',
           overflow: 'hidden',
         }}>
-          {/* Table Header */}
           <div style={{
             padding: '1.25rem 1.5rem',
             borderBottom: '1px solid #f4f4f5',
@@ -181,9 +174,8 @@ const BrandDashboard = () => {
           </div>
 
           {products.length === 0 ? (
-            /* Empty State */
             <div style={{ padding: '4rem 2rem', textAlign: 'center' }}>
-              <div style={{ fontSize: '3.5rem', marginBottom: '1rem' }}>📦</div>
+              <div style={{ fontSize: '3.5rem', marginBottom: '1rem' }}></div>
               <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#18181b', marginBottom: '0.5rem' }}>No products yet</h3>
               <p style={{ color: '#71717a', fontSize: '0.9rem', marginBottom: '1.5rem' }}>
                 Create your first product and start selling on MarketNest!
@@ -201,7 +193,6 @@ const BrandDashboard = () => {
               </button>
             </div>
           ) : (
-            /* Products Table */
             <div style={{ overflowX: 'auto' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                 <thead>
@@ -224,7 +215,6 @@ const BrandDashboard = () => {
                       onMouseOver={e => e.currentTarget.style.background = '#fafafa'}
                       onMouseOut={e => e.currentTarget.style.background = 'transparent'}
                     >
-                      {/* Product Name + Image */}
                       <td style={{ padding: '1rem 1.25rem' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                           <div style={{
@@ -235,7 +225,7 @@ const BrandDashboard = () => {
                           }}>
                             {product.images?.[0] ? (
                               <img src={product.images[0]} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                            ) : '👕'}
+                            ) : ''}
                           </div>
                           <div>
                             <div style={{ fontWeight: 600, color: '#18181b', fontSize: '0.9rem' }}>{product.name}</div>
@@ -243,15 +233,11 @@ const BrandDashboard = () => {
                           </div>
                         </div>
                       </td>
-
-                      {/* Price */}
                       <td style={{ padding: '1rem 1.25rem' }}>
                         <span style={{ fontWeight: 700, color: '#18181b', fontSize: '0.95rem' }}>
                           ₹{product.price?.toLocaleString()}
                         </span>
                       </td>
-
-                      {/* Stock */}
                       <td style={{ padding: '1rem 1.25rem' }}>
                         <span style={{
                           fontWeight: 600, fontSize: '0.88rem',
@@ -260,8 +246,6 @@ const BrandDashboard = () => {
                           {product.stock === 0 ? 'Out of stock' : `${product.stock} units`}
                         </span>
                       </td>
-
-                      {/* Status Badge */}
                       <td style={{ padding: '1rem 1.25rem' }}>
                         <span style={{
                           padding: '0.3rem 0.75rem', borderRadius: '9999px',
@@ -276,8 +260,6 @@ const BrandDashboard = () => {
                            product.status === 'draft' ? '● Draft' : '● Archived'}
                         </span>
                       </td>
-
-                      {/* Actions */}
                       <td style={{ padding: '1rem 1.25rem' }}>
                         <div style={{ display: 'flex', gap: '0.5rem' }}>
                           <button
@@ -291,7 +273,7 @@ const BrandDashboard = () => {
                             onMouseOver={e => { e.currentTarget.style.background = '#6366f1'; e.currentTarget.style.color = 'white'; }}
                             onMouseOut={e => { e.currentTarget.style.background = '#eef2ff'; e.currentTarget.style.color = '#4f46e5'; }}
                           >
-                            ✏️ Edit
+                            Edit
                           </button>
                           <button
                             onClick={() => handleDeleteProduct(product._id)}
@@ -304,7 +286,7 @@ const BrandDashboard = () => {
                             onMouseOver={e => { e.currentTarget.style.background = '#f43f5e'; e.currentTarget.style.color = 'white'; }}
                             onMouseOut={e => { e.currentTarget.style.background = '#fff1f2'; e.currentTarget.style.color = '#e11d48'; }}
                           >
-                            🗑️ Delete
+                            Delete
                           </button>
                         </div>
                       </td>
@@ -315,8 +297,6 @@ const BrandDashboard = () => {
             </div>
           )}
         </div>
-
-        {/* ── FOOTER NOTE ── */}
         <p style={{ textAlign: 'center', color: '#a1a1aa', fontSize: '0.8rem', marginTop: '2rem' }}>
           MarketNest Seller Dashboard · © 2026
         </p>

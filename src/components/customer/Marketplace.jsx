@@ -30,9 +30,9 @@ const Marketplace = () => {
       const data = await getProducts(page, 12, filters);
       setProducts(data.products || []);
       setTotalProducts(data.pagination?.total || 0);
-      console.log('✅ Products fetched:', data);
+      console.log('Products fetched:', data);
     } catch (error) {
-      console.error('❌ Error fetching products:', error);
+      console.error('Error fetching products:', error);
       toast.error('Failed to load products');
     } finally {
       setLoading(false);
@@ -65,7 +65,7 @@ const Marketplace = () => {
           </div>
         ) : products.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-xl text-gray-500">📭 No products found</p>
+            <p className="text-xl text-gray-500">No products found</p>
             <p className="text-gray-400">Try adjusting your filters</p>
           </div>
         ) : (
@@ -77,39 +77,34 @@ const Marketplace = () => {
                   className="card hover:shadow-lg cursor-pointer transition"
                   onClick={() => navigate(`/product/${product._id}`)}
                 >
-                  {/* Product Image */}
                   <div className="relative w-full h-48 bg-gray-100 rounded mb-3 overflow-hidden">
                     <img
-                      src={product.images?.[0] || FALLBACK_IMG}   
+                      src={product.images?.[0] || FALLBACK_IMG}
                       alt={product.name}
                       className="w-full h-full object-cover"
                       onError={(e) => {
-                        e.target.onerror = null;                   // ✅ Prevent infinite loop
+                        e.target.onerror = null;
                         e.target.src = FALLBACK_IMG;
                       }}
                     />
                   </div>
 
-                  {/* Product Info */}
                   <h3 className="font-bold text-lg mb-1 truncate">{product.name}</h3>
                   <p className="text-gray-600 text-sm mb-2">
-                    📂 {product.category?.name || product.category || 'Uncategorized'}
+                    {product.category?.name || product.category || 'Uncategorized'}
                   </p>
                   <p className="text-2xl font-bold text-blue-600 mb-3">₹{product.price}</p>
 
-                  {/* Stock Info */}
                   {product.stock > 0 ? (
-                    <p className="text-green-600 text-sm mb-3">✅ In Stock ({product.stock})</p>
+                    <p className="text-green-600 text-sm mb-3">In Stock ({product.stock})</p>
                   ) : (
-                    <p className="text-red-600 text-sm mb-3">❌ Out of Stock</p>
+                    <p className="text-red-600 text-sm mb-3">Out of Stock</p>
                   )}
 
-                  <button className="btn-primary w-full">👁️ View Details</button>
+                  <button className="btn-primary w-full">View Details</button>
                 </div>
               ))}
             </div>
-
-            {/* Pagination */}
             <div className="flex justify-center gap-4 py-8">
               <button
                 disabled={page === 1}

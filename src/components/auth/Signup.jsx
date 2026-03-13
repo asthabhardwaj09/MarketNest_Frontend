@@ -44,18 +44,15 @@ const Signup = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-primary-subtle py-12 px-4">
       <div className="w-full max-w-md">
-        {/* Card */}
         <div className="card-elevated">
-          {/* Header */}
+
           <div className="text-center mb-8">
-            <div className="text-4xl mb-3">🛍️</div>
+            <div className="text-4xl mb-3"></div>
             <h1 className="text-3xl font-bold text-neutral-900">Create Account</h1>
             <p className="text-neutral-600 mt-2">Join MarketNest today</p>
           </div>
 
-          {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Name Field */}
             <div className="form-group">
               <label htmlFor="name">Full Name</label>
               <input
@@ -69,7 +66,6 @@ const Signup = () => {
               />
             </div>
 
-            {/* Email Field */}
             <div className="form-group">
               <label htmlFor="email">Email Address</label>
               <input
@@ -83,7 +79,6 @@ const Signup = () => {
               />
             </div>
 
-            {/* Password Field */}
             <div className="form-group">
               <label htmlFor="password">Password</label>
               <input
@@ -98,7 +93,6 @@ const Signup = () => {
               <p className="text-xs text-neutral-500 mt-1">At least 6 characters</p>
             </div>
 
-            {/* Confirm Password Field */}
             <div className="form-group">
               <label htmlFor="confirmPassword">Confirm Password</label>
               <input
@@ -112,7 +106,6 @@ const Signup = () => {
               />
             </div>
 
-            {/* Role Selection */}
             <div className="form-group">
               <label htmlFor="role">Account Type</label>
               <select
@@ -121,8 +114,8 @@ const Signup = () => {
                 value={formData.role}
                 onChange={handleChange}
               >
-                <option value="Customer">🛒 Customer (Buyer)</option>
-                <option value="Brand">🏪 Brand (Seller)</option>
+                <option value="Customer">Customer (Buyer)</option>
+                <option value="Brand">Brand (Seller)</option>
               </select>
               <p className="text-xs text-neutral-500 mt-1">
                 {formData.role === 'Customer' 
@@ -131,30 +124,36 @@ const Signup = () => {
               </p>
             </div>
 
-            {/* Terms & Conditions */}
-            <div className="flex items-start gap-2">
-              <input 
-                type="checkbox" 
-                id="terms" 
-                className="w-4 h-4 mt-1 accent-primary-500"
-                required 
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <input
+                type="checkbox"
+                id="terms"
+                required
+                style={{
+                  width: '16px',
+                  height: '16px',
+                  minWidth: '16px',
+                  cursor: 'pointer',
+                  accentColor: '#6366f1',
+                }}
               />
-              <label htmlFor="terms" className="text-sm text-neutral-700 cursor-pointer">
-                I agree to the <a href="#" className="text-primary-600 hover:underline">Terms & Conditions</a> and <a href="#" className="text-primary-600 hover:underline">Privacy Policy</a>
+              <label htmlFor="terms" style={{ fontSize: '0.85rem', color: '#52525b', cursor: 'pointer', margin: 0 }}>
+                I agree to the{' '}
+                <a href="#" style={{ color: '#6366f1' }}>Terms & Conditions</a>
+                {' '}and{' '}
+                <a href="#" style={{ color: '#6366f1' }}>Privacy Policy</a>
               </label>
             </div>
 
-            {/* Submit Button */}
             <button
               type="submit"
               disabled={loading}
               className="btn btn-primary w-full mt-6"
             >
-              {loading ? '⏳ Creating account...' : 'Create Account'}
+              {loading ? 'Creating account...' : 'Create Account'}
             </button>
           </form>
 
-          {/* Divider */}
           <div className="mt-6 mb-6 relative">
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-neutral-300"></div>
@@ -164,7 +163,6 @@ const Signup = () => {
             </div>
           </div>
 
-          {/* Login Link */}
           <p className="text-center text-neutral-700">
             Already have an account?{' '}
             <button
@@ -176,9 +174,8 @@ const Signup = () => {
           </p>
         </div>
 
-        {/* Footer Info */}
         <div className="mt-8 text-center text-neutral-600 text-sm space-y-1">
-          <p>🔒 100% Secure & Encrypted</p>
+          <p>100% Secure & Encrypted</p>
           <p>Fast signup in just 2 minutes</p>
         </div>
       </div>

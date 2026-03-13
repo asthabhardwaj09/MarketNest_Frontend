@@ -13,41 +13,38 @@ const ProductFormSimple = () => {
   const [uploading, setUploading] = useState(false);
   const [categories, setCategories] = useState([]);
   const [selectedCategoryId, setSelectedCategoryId] = useState('');
-  
+
   const [formData, setFormData] = useState({
     name: '',
     description: '',
     price: '',
     stock: '',
-    status: 'published'  // Changed from 'draft' to 'published' so customers can see it
+    status: 'published'
   });
 
-  // ═══════════════════════════════════════════════
-  // FETCH CATEGORIES ON MOUNT
-  // ═══════════════════════════════════════════════
   useEffect(() => {
     const fetchCats = async () => {
       try {
-        console.log('🔄 Fetching categories from backend...');
+        console.log('Fetching categories from backend...');
         const catsData = await getCategories();
-        console.log('📦 Categories received:', catsData);
-        
-        // Handle if API returns categories directly or wrapped in object
+        console.log('Categories received:', catsData);
+
+
         let catsArray = Array.isArray(catsData) ? catsData : catsData?.categories || [];
-        
-        console.log('✅ Setting categories state:', catsArray);
+
+        console.log('Setting categories state:', catsArray);
         setCategories(catsArray);
-        
-        // Auto-select first category
+
+
         if (catsArray.length > 0) {
-          console.log('🎯 Auto-selecting first category:', catsArray[0]._id);
+          console.log('Auto-selecting first category:', catsArray[0]._id);
           setSelectedCategoryId(catsArray[0]._id);
         } else {
-          console.warn('⚠️ No categories available!');
+          console.warn('No categories available!');
           toast.error('No categories found. Please seed categories first.');
         }
       } catch (error) {
-        console.error('❌ Error fetching categories:', error);
+        console.error('Error fetching categories:', error);
         toast.error('Failed to load categories');
       }
     };
@@ -65,9 +62,7 @@ const ProductFormSimple = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  // ═══════════════════════════════════════════════
-  // IMAGE UPLOAD TO CLOUDINARY
-  // ═══════════════════════════════════════════════
+
   const handleImageUpload = async (e) => {
     const files = Array.from(e.target.files);
     setUploading(true);
@@ -84,22 +79,18 @@ const ProductFormSimple = () => {
         );
 
         if (!response.ok) throw new Error('Upload failed');
-        
+
         const data = await response.json();
         setImages(prev => [...prev, data.secure_url]);
-        toast.success('✅ Image uploaded successfully');
+        toast.success('Image uploaded successfully');
       }
     } catch (error) {
-      toast.error('❌ Image upload failed - check Cloudinary config');
+      toast.error('Image upload failed - check Cloudinary config');
       console.error(error);
     } finally {
       setUploading(false);
     }
   };
-
-  // ═══════════════════════════════════════════════
-  // ADD IMAGE FROM URL
-  // ═══════════════════════════════════════════════
   const addImageFromUrl = () => {
     if (!urlInput.trim()) {
       return toast.error('Please enter an image URL');
@@ -113,12 +104,8 @@ const ProductFormSimple = () => {
 
     setImages(prev => [...prev, urlInput.trim()]);
     setUrlInput('');
-    toast.success('✅ Image URL added successfully');
+    toast.success('Image URL added successfully');
   };
-
-  // ═══════════════════════════════════════════════
-  // REMOVE IMAGE
-  // ═══════════════════════════════════════════════
   const removeImage = (index) => {
     setImages(prev => prev.filter((_, i) => i !== index));
     toast.success('Image removed');
@@ -126,7 +113,7 @@ const ProductFormSimple = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!formData.name || !formData.description || !formData.price || !formData.stock) {
       toast.error('Please fill all required fields');
       return;
@@ -150,23 +137,21 @@ const ProductFormSimple = () => {
         description: formData.description,
         price: parseFloat(formData.price),
         stock: parseInt(formData.stock),
-        category: selectedCategoryId, // Use the category ID
+        category: selectedCategoryId,
         status: formData.status,
-        images: images // All images are URLs (from Cloudinary or Unsplash)
+        images: images
       };
 
       const response = await createProduct(productPayload);
-      
-      toast.success('✅ Product created successfully!');
+
+      toast.success('Product created successfully!');
       console.log('Product created:', response);
-      
-      // Redirect to brand dashboard after 1 second
       setTimeout(() => {
         navigate('/brand/dashboard');
       }, 1000);
     } catch (error) {
       const errorMessage = error.response?.data?.message || 'Failed to create product';
-      toast.error(`❌ ${errorMessage}`);
+      toast.error(`${errorMessage}`);
       console.error('Product creation error:', error);
     } finally {
       setUploading(false);
@@ -174,33 +159,30 @@ const ProductFormSimple = () => {
   };
 
   return (
-    <div style={{ 
-      minHeight: '100vh', 
-      backgroundColor: '#f5f5f5', 
+    <div style={{
+      minHeight: '100vh',
+      backgroundColor: '#f5f5f5',
       paddingTop: '100px',
       paddingBottom: '40px'
     }}>
-      <div style={{ 
-        maxWidth: '900px', 
-        margin: '0 auto', 
+      <div style={{
+        maxWidth: '900px',
+        margin: '0 auto',
         padding: '0 20px'
       }}>
-        {/* Header */}
         <div style={{ marginBottom: '30px' }}>
-          <h1 style={{ 
-            fontSize: '2.5rem', 
-            fontWeight: 'bold', 
+          <h1 style={{
+            fontSize: '2.5rem',
+            fontWeight: 'bold',
             color: '#1a1a1a',
             marginBottom: '10px'
           }}>
-            ➕ Create New Product
+            Create New Product
           </h1>
           <p style={{ fontSize: '1.1rem', color: '#666' }}>
             Add a new product to your store
           </p>
         </div>
-
-        {/* Form Card */}
         <div style={{
           backgroundColor: 'white',
           borderRadius: '12px',
@@ -209,8 +191,6 @@ const ProductFormSimple = () => {
           border: '1px solid #e0e0e0'
         }}>
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '25px' }}>
-            
-            {/* Product Name */}
             <div>
               <label style={{ display: 'block', fontWeight: '600', marginBottom: '8px', color: '#1a1a1a' }}>
                 Product Name *
@@ -233,7 +213,6 @@ const ProductFormSimple = () => {
               />
             </div>
 
-            {/* Description */}
             <div>
               <label style={{ display: 'block', fontWeight: '600', marginBottom: '8px', color: '#1a1a1a' }}>
                 Description *
@@ -257,7 +236,6 @@ const ProductFormSimple = () => {
               />
             </div>
 
-            {/* Price & Stock */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
               <div>
                 <label style={{ display: 'block', fontWeight: '600', marginBottom: '8px', color: '#1a1a1a' }}>
@@ -305,16 +283,15 @@ const ProductFormSimple = () => {
               </div>
             </div>
 
-            {/* Category & Status */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
               <div>
                 <label style={{ display: 'block', fontWeight: '600', marginBottom: '8px', color: '#1a1a1a' }}>
-                  Category * {categories.length === 0 && <span style={{color: '#dc2626'}}>⚠️ Loading...</span>}
+                  Category * {categories.length === 0 && <span style={{ color: '#dc2626' }}>Loading...</span>}
                 </label>
                 <select
                   value={selectedCategoryId}
                   onChange={(e) => {
-                    console.log('📂 Category selected:', e.target.value);
+                    console.log('Category selected:', e.target.value);
                     setSelectedCategoryId(e.target.value);
                   }}
                   style={{
@@ -329,19 +306,19 @@ const ProductFormSimple = () => {
                   disabled={categories.length === 0}
                 >
                   <option value="">
-                    {categories.length === 0 
-                      ? '⏳ Loading categories...' 
+                    {categories.length === 0
+                      ? 'Loading categories...'
                       : '-- Select Category --'}
                   </option>
                   {categories.map(cat => (
                     <option key={cat._id} value={cat._id}>
-                      📂 {cat.name}
+                      {cat.name}
                     </option>
                   ))}
                 </select>
                 {categories.length === 0 && (
                   <p style={{ fontSize: '0.85rem', color: '#dc2626', marginTop: '6px' }}>
-                    ⚠️ Categories not loaded. Try refreshing the page.
+                    Categories not loaded. Try refreshing the page.
                   </p>
                 )}
               </div>
@@ -363,22 +340,20 @@ const ProductFormSimple = () => {
                     boxSizing: 'border-box'
                   }}
                 >
-                  <option value="published">✅ Published (Visible to Customers)</option>
-                  <option value="draft">📝 Draft (Hidden from Customers)</option>
+                  <option value="published">Published (Visible to Customers)</option>
+                  <option value="draft">Draft (Hidden from Customers)</option>
                 </select>
                 <p style={{ fontSize: '0.85rem', color: '#666', marginTop: '6px' }}>
-                  💡 Tip: Select "Published" to make your product visible in the marketplace
+                  Tip: Select "Published" to make your product visible in the marketplace
                 </p>
               </div>
             </div>
 
-            {/* Image Upload Section */}
             <div>
               <label style={{ display: 'block', fontWeight: '600', marginBottom: '12px', color: '#1a1a1a' }}>
                 Product Images *
               </label>
 
-              {/* Mode Toggle Buttons */}
               <div style={{
                 display: 'flex',
                 gap: '10px',
@@ -409,7 +384,7 @@ const ProductFormSimple = () => {
                     if (imageMode !== 'upload') e.target.style.backgroundColor = 'transparent';
                   }}
                 >
-                  📸 Upload Files
+                  Upload Files
                 </button>
                 <button
                   type="button"
@@ -432,11 +407,9 @@ const ProductFormSimple = () => {
                     if (imageMode !== 'url') e.target.style.backgroundColor = 'transparent';
                   }}
                 >
-                  🔗 Add URL
+                  Add URL
                 </button>
               </div>
-
-              {/* Upload Files Mode */}
               {imageMode === 'upload' && (
                 <div>
                   <input
@@ -469,7 +442,7 @@ const ProductFormSimple = () => {
                     }}
                   >
                     <p style={{ fontSize: '1.1rem', fontWeight: '600', color: '#3b82f6', marginBottom: '8px' }}>
-                      {uploading ? '⏳ Uploading...' : '📸 Click to upload images or drag & drop'}
+                      {uploading ? 'Uploading...' : 'Click to upload images or drag & drop'}
                     </p>
                     <p style={{ fontSize: '0.9rem', color: '#666' }}>
                       PNG, JPG, GIF up to 10MB (uploads to Cloudinary)
@@ -477,8 +450,6 @@ const ProductFormSimple = () => {
                   </label>
                 </div>
               )}
-
-              {/* URL Input Mode */}
               {imageMode === 'url' && (
                 <div style={{ display: 'flex', gap: '10px', marginBottom: '15px' }}>
                   <input
@@ -512,12 +483,10 @@ const ProductFormSimple = () => {
                     onMouseEnter={(e) => e.target.style.backgroundColor = '#059669'}
                     onMouseLeave={(e) => e.target.style.backgroundColor = '#10b981'}
                   >
-                    ➕ Add
+                    Add
                   </button>
                 </div>
               )}
-
-              {/* Image Tips */}
               {imageMode === 'url' && (
                 <div style={{
                   backgroundColor: '#f9fafb',
@@ -528,11 +497,9 @@ const ProductFormSimple = () => {
                   color: '#666',
                   marginBottom: '15px'
                 }}>
-                  💡 <strong>Unsplash Images:</strong> Visit unsplash.com, right-click any image → Copy Link, then paste here
+                  <strong>Unsplash Images:</strong> Visit unsplash.com, right-click any image → Copy Link, then paste here
                 </div>
               )}
-
-              {/* Image Previews */}
               {images.length > 0 && (
                 <div>
                   <p style={{ fontWeight: '600', marginBottom: '12px', color: '#1a1a1a' }}>
@@ -602,8 +569,6 @@ const ProductFormSimple = () => {
                 </div>
               )}
             </div>
-
-            {/* Submit Buttons */}
             <div style={{ display: 'flex', gap: '20px', paddingTop: '20px', borderTop: '1px solid #e0e0e0' }}>
               <button
                 type="submit"
@@ -622,7 +587,7 @@ const ProductFormSimple = () => {
                 onMouseEnter={(e) => e.target.style.backgroundColor = '#4f46e5'}
                 onMouseLeave={(e) => e.target.style.backgroundColor = '#6366f1'}
               >
-                ➕ Create Product
+                Create Product
               </button>
               <button
                 type="button"
