@@ -10,8 +10,8 @@ A full-stack fashion marketplace built with the **MERN stack**, supporting two u
 |----------|-----|
 | 🌐 Frontend | https://market-nest-frontend-umber.vercel.app/ |
 | 🔧 Backend API | https://marketnest-backend-kxer.onrender.com/ |
-| 📦 GitHub Repo Frontend | https://github.com/asthabhardwaj09/MarketNest_Frontend |
-| 📦 GitHub Repo Backend| | https://github.com/asthabhardwaj09/MarketNest_Backend |
+| 📦 GitHub Repo Frontend | https://github.com/asthabhardwaj09/MarketNest_Frontend/ |
+| 📦 GitHub Repo Backend| | https://github.com/asthabhardwaj09/MarketNest_Backend/ |
 
 
 
